@@ -1,0 +1,13 @@
+- [ ] Research rules
+- [ ] Game state traversing
+    - [ ] Possible next moves
+    - [ ] Possible previous moves
+    - [ ] Recognize flipped and rotated states as siblings
+    - [ ] Define siblings' "leader"
+    - [ ] Game state ID
+- [ ] Learning task
+    - [ ] Follow all possible moves
+    - [ ] Map game states to scores
+- [ ] AI!
+- [ ] I/O
+    - [ ] Try Opal
