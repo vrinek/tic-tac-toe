@@ -17,8 +17,6 @@ module Game
       moves
     end
 
-    private
-
     def current_player
       spaces = @board.to_a
 
