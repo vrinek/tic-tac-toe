@@ -1,4 +1,4 @@
-- [ ] Research rules
+- [x] Research rules
 - [ ] Game state traversing
     - [ ] Possible next moves
     - [ ] Possible previous moves
