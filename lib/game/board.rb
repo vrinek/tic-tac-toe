@@ -11,8 +11,20 @@ module Game
       @board_str = board_str
     end
 
+    def to_a
+      @board_str.chars
+    end
+
+    def to_s
+      @board_str
+    end
+
+    def ==(other)
+      other.is_a?(self.class) && to_s == other.to_s
+    end
+
     def values_at(*args)
-      @board_str.chars.values_at(*args)
+      to_a.values_at(*args)
     end
 
     def empty?
@@ -20,7 +32,7 @@ module Game
     end
 
     def full?
-      !@board_str.chars.find{|c| c == EMPTY}
+      !to_a.find{|c| c == EMPTY}
     end
 
     def play(what, where)
