@@ -3,18 +3,31 @@ require 'game'
 module Game
   # The Board holds all the X and O. It only knows whether it is valid or not.
   class Board
-    EMPTY_BOARD = EMPTY*9
+    EMPTY_BOARD_STR = EMPTY*9
 
-    def initialize(board = EMPTY_BOARD)
-      @board = board
+    class InvalidMove < StandardError; end
+
+    def initialize(board_str = EMPTY_BOARD_STR)
+      @board_str = board_str
     end
 
     def empty?
-      @board == EMPTY_BOARD
+      @board_str == EMPTY_BOARD_STR
+    end
+
+    def play(what, where)
+      unless @board_str[where] == EMPTY
+        raise InvalidMove.new("There is already a mark in space #{where}.")
+      end
+
+      new_board_str = @board_str.dup
+      new_board_str[where] = what
+
+      Board.new(new_board_str)
     end
 
     def valid?
-      chars = @board.chars
+      chars = @board_str.chars
       x_plays = chars.select{|c| c == X}.length
       o_plays = chars.select{|c| c == O}.length
 

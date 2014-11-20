@@ -9,29 +9,14 @@ describe Game::Board do
   end
 
   context "a board with a few of moves" do
-    let(:board_str) do
-      (Game::EMPTY*9).tap do |str|
-        str[3] = Game::X
-        str[7] = Game::O
-        str[4] = Game::X
-      end
-    end
-
-    subject { Game::Board.new(board_str) }
+    subject { Game::Board.new.play(Game::X, 3).play(Game::O, 4).play(Game::X, 7) }
 
     it { is_expected.to_not be_empty }
     it { is_expected.to be_valid }
   end
 
   context "a board with invalid moves" do
-    let(:board_str) do
-      (Game::EMPTY*9).tap do |str|
-        str[3] = Game::X
-        str[7] = Game::X # X plays twice
-      end
-    end
-
-    subject { Game::Board.new(board_str) }
+    subject { Game::Board.new.play(Game::X, 3).play(Game::X, 7) }
 
     it { is_expected.to_not be_valid }
   end
