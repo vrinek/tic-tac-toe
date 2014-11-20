@@ -6,6 +6,7 @@ describe Game::Board do
 
     it { is_expected.to be_empty }
     it { is_expected.to be_valid }
+    it { is_expected.to_not be_full }
   end
 
   context "a board with a few of moves" do
@@ -13,11 +14,26 @@ describe Game::Board do
 
     it { is_expected.to_not be_empty }
     it { is_expected.to be_valid }
+    it { is_expected.to_not be_full }
   end
 
   context "a board with invalid moves" do
-    subject { Game::Board.new.play(Game::X, 3).play(Game::X, 7) }
+    subject { Game::Board.new("001001000") }
 
     it { is_expected.to_not be_valid }
+  end
+
+  context "a filled up board" do
+    subject do
+      Game::Board.new.
+        play(Game::X, 0).play(Game::O, 1).
+        play(Game::X, 3).play(Game::O, 6).
+        play(Game::X, 2).play(Game::O, 4).
+        play(Game::X, 7).play(Game::O, 8).
+        play(Game::X, 5)
+    end
+
+    it { is_expected.to be_full }
+    it { is_expected.to_not be_empty }
   end
 end
