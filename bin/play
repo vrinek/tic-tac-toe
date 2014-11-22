@@ -1,0 +1,7 @@
+#!/bin/sh ruby
+$: << "./lib"
+
+require "game/interface"
+require "players"
+
+Game::Interface.new.start(HumanPlayer, RandomPlayer)

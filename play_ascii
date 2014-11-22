@@ -1,6 +1,0 @@
-#!/bin/sh ruby
-$: << "./lib"
-
-require "game/ascii_interface"
-
-Game::AsciiInterface.new.start
