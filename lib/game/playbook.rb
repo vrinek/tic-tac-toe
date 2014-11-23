@@ -11,16 +11,17 @@ module Game
 
     def best_moves(board)
       progression = Progression.new(board)
-      moves_map = {MIN => [], DRAW => [], MAX => []}
-      progression.next_moves.each do |move|
+      moves_map = progression.next_moves.each_with_object({}) do |move, map|
         next_board = move.apply_to(board)
-        moves_map[value(next_board)] << move
+        v = value(next_board)
+        map[v] ||= []
+        map[v] << move
       end
 
       if progression.current_player == X
-        moves_map[MAX].any? ? moves_map[MAX] : moves_map[DRAW]
+        moves_map[MAX] || moves_map[DRAW] || moves_map[MIN]
       else
-        moves_map[MIN].any? ? moves_map[MIN] : moves_map[DRAW]
+        moves_map[MIN] || moves_map[DRAW] || moves_map[MAX]
       end
     end
 

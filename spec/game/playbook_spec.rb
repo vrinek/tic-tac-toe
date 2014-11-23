@@ -46,4 +46,20 @@ describe Game::Playbook do
       )
     end
   end
+
+  context "on a board that has been forked" do
+    let(:board) { Game::Board.new("022112010") }
+
+    it "calculates the value as MIN" do
+      expect(subject.value(board)).to eql(Game::Playbook::MIN)
+    end
+
+    it "advices X to just keep playing" do
+      expect(subject.best_moves(board)).to contain_exactly(
+        Game::Move.new(Game::X, 0),
+        Game::Move.new(Game::X, 6),
+        Game::Move.new(Game::X, 8)
+      )
+    end
+  end
 end
