@@ -7,8 +7,8 @@ module Game
   class Interface
     class InvalidInput < StandardError; end
 
-    def initialize
-      @board = Board.new
+    def initialize(starting_board = Board.new)
+      @board = starting_board
     end
 
     def start(x_player_class, o_player_class)
