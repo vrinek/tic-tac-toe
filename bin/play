@@ -4,5 +4,6 @@ $: << "./lib"
 require "game/interface"
 require "player/human"
 require "player/random"
+require "player/ai"
 
-Game::Interface.new.start(Player::Human, Player::Random)
+Game::Interface.new.start(Player::Human, Player::AI)
