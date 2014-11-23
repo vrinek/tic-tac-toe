@@ -1,7 +1,10 @@
 require 'game'
 
 module Game
-  # The Board holds all the X and O. It only knows whether it is valid or not.
+  # The Board is the state.
+  # It holds all the X and O.
+  # It knows whether it is valid or not.
+  # It knows how to transition to a new board.
   class Board
     EMPTY_BOARD_STR = EMPTY * 9
 

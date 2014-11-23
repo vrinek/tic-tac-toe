@@ -2,6 +2,9 @@ require 'game'
 require 'game/board'
 
 module Game
+  # The EndCondition holds the logic for the end of the game.
+  # It knows if the game has ended.
+  # It knows who won the game or if it ended into a draw.
   class EndCondition
     WIN_INDEX_TRIPLETS = [
       # horizontal

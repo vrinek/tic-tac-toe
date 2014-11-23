@@ -2,6 +2,9 @@ require 'game'
 require 'game/move'
 
 module Game
+  # The Progression holds the connections between states.
+  # It knows which moves are available at each possible state.
+  # It knows whose player's turn it is to play.
   class Progression
     def initialize(board)
       @board = board
