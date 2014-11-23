@@ -25,7 +25,7 @@ module Game
           retry
         end
 
-        break if game_ended?
+        break if end_condition.ended?
       end
 
       players.each do |player|
@@ -35,12 +35,6 @@ module Game
     end
 
     private
-
-    def game_ended?
-      end_condition.x_won? ||
-      end_condition.o_won? ||
-      end_condition.draw?
-    end
 
     def progression
       Progression.new(@board)

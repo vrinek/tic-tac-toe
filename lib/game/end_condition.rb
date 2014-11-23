@@ -19,6 +19,10 @@ module Game
       @board = board
     end
 
+    def ended?
+      x_won? || o_won? || draw?
+    end
+
     def x_won?
       WIN_INDEX_TRIPLETS.any? do |triplet|
         @board.values_at(*triplet) == [X, X, X]
