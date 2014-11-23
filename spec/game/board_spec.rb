@@ -14,7 +14,11 @@ describe Game::Board do
   end
 
   context "a board with a few of moves" do
-    subject { Game::Board.new.play(Game::X, 3).play(Game::O, 4).play(Game::X, 7) }
+    subject do
+      Game::Board.new.
+        play(Game::X, 3).play(Game::O, 4).
+        play(Game::X, 7)
+    end
 
     it { is_expected.to_not be_empty }
     it { is_expected.to be_valid }

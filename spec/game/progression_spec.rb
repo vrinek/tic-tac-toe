@@ -1,4 +1,5 @@
 require 'game/progression'
+require 'game/board'
 
 describe Game::Progression do
   describe "next moves" do
@@ -9,20 +10,24 @@ describe Game::Progression do
 
       it { expect(subject.length).to eql(9) }
 
-      it "returns one Game::Board for each space" do
-        expected_strings = [
-          '000000001', '000000010', '000000100',
-          '000001000', '000010000', '000100000',
-          '001000000', '010000000', '100000000',
+      it "returns one Game::Move for each space" do
+        expected_moves = [
+          Game::Move.new(Game::X, 0),
+          Game::Move.new(Game::X, 1),
+          Game::Move.new(Game::X, 2),
+          Game::Move.new(Game::X, 3),
+          Game::Move.new(Game::X, 4),
+          Game::Move.new(Game::X, 5),
+          Game::Move.new(Game::X, 6),
+          Game::Move.new(Game::X, 7),
+          Game::Move.new(Game::X, 8),
         ]
 
-        actual_strings = subject.map(&:to_s)
-
-        expect(actual_strings).to contain_exactly(*expected_strings)
+        is_expected.to contain_exactly(*expected_moves)
       end
 
-      it "returns and Array of Game::Board" do
-        expect(subject.map(&:class).uniq).to eql([Game::Board])
+      it "returns and Array of Game::Move instances" do
+        expect(subject.map(&:class).uniq).to eql([Game::Move])
       end
     end
 
@@ -31,16 +36,17 @@ describe Game::Progression do
 
       it { expect(subject.length).to eql(9 - 3) }
 
-      it "returns one Game::Board for each empty space" do
-        expected_strings = [
-          '010020021', '010020201',
-          '010022001', '010220001',
-          '012020001', '210020001',
+      it "returns one Game::Move for each empty space" do
+        expected_moves = [
+          Game::Move.new(Game::O, 0),
+          Game::Move.new(Game::O, 2),
+          Game::Move.new(Game::O, 3),
+          Game::Move.new(Game::O, 5),
+          Game::Move.new(Game::O, 6),
+          Game::Move.new(Game::O, 7),
         ]
 
-        actual_strings = subject.map(&:to_s)
-
-        expect(actual_strings).to contain_exactly(*expected_strings)
+        is_expected.to contain_exactly(*expected_moves)
       end
     end
   end

@@ -1,5 +1,5 @@
 require 'game'
-require 'game/board'
+require 'game/move'
 
 module Game
   class Progression
@@ -11,7 +11,7 @@ module Game
       moves = []
       @board.to_a.each_with_index do |mark, index|
         if mark == EMPTY
-          moves << @board.play(current_player, index)
+          moves << Move.new(current_player, index)
         end
       end
       moves
