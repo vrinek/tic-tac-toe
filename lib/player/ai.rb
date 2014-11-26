@@ -9,6 +9,7 @@ module Player
     end
 
     def show_state(board)
+      @playbook.precompile! unless @playbook.precompiled?
       @board = board
     end
 
