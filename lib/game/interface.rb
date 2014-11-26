@@ -11,7 +11,7 @@ module Game
       @board = starting_board
     end
 
-    def start(x_player_class, o_player_class)
+    def start(x_player_class, o_player_class, announce_result: false)
       players = [x_player_class.new("X"), o_player_class.new("O")]
 
       players.each(&:show_intro)
@@ -28,12 +28,12 @@ module Game
         break if end_condition.ended?
       end
 
-      # puts end_condition
-
       players.each do |player|
         player.show_state(@board)
         player.show_end_message(end_condition)
       end
+
+      puts end_condition if announce_result
     end
 
     private

@@ -2,6 +2,7 @@
 
 To play the game, just clone this repository and run `./bin/play`. You should see something like this:
 
+    Do you want to play with X or O? X
     Welcome to a game of Tic-Tac-Toe!
     The board positions can be selected by using the Numpad.
        |   |

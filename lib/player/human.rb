@@ -32,10 +32,10 @@ module Player
     end
 
     def show_end_message(end_condition)
-      if end_condition.x_won?
-        puts "X won!"
-      elsif end_condition.o_won?
-        puts "O won!"
+      if end_condition.x_won? && @mark == "X" || end_condition.o_won? && @mark == "O"
+        puts "You won!"
+      elsif end_condition.o_won? && @mark == "X" || end_condition.x_won? && @mark == "O"
+        puts "You lost..."
       elsif end_condition.draw?
         puts "It's a draw."
       end

@@ -6,4 +6,20 @@ require "player/human"
 require "player/random"
 require "player/ai"
 
-Game::Interface.new.start(Player::Human, Player::AI)
+print "Do you want to play with X or O? "
+loop do
+  input = STDIN.gets.strip
+  case input
+  when "O", "o"
+    Game::Interface.new.start(Player::AI, Player::Human)
+    break
+  when "X", "x"
+    Game::Interface.new.start(Player::Human, Player::AI)
+    break
+  when ""
+    Game::Interface.new.start(Player::AI, Player::AI, announce_result: true)
+    break
+  else
+    print "Unrecognized input #{input.inspect}. Please enter either X or O: "
+  end
+end
