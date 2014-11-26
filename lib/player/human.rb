@@ -2,12 +2,6 @@ require 'player/base'
 
 module Player
   class Human < Base
-    MARKS = {
-      Game::EMPTY => " ",
-      Game::X     => "X",
-      Game::O     => "O",
-    }
-
     BOARD_TO_NUMPAD = [
       7, 8, 9,
       4, 5, 6,
@@ -15,7 +9,7 @@ module Player
     ]
 
     def initialize(mark)
-      @mark = MARKS[mark]
+      @mark = mark
     end
 
     def ask_for_input
@@ -25,13 +19,7 @@ module Player
     end
 
     def show_state(board)
-      marks = board.to_a.map { |m| MARKS[m] }
-
-      print " " + marks[0, 3].join(" | ") + " \n" +
-            "-" * 11 + "\n" +
-            " " + marks[3, 3].join(" | ") + " \n" +
-            "-" * 11 + "\n" +
-            " " + marks[6, 3].join(" | ") + " \n"
+      board.pretty_print
     end
 
     def show_exception(exception)

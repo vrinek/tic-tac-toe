@@ -22,6 +22,21 @@ module Game
       @board_str
     end
 
+    def pretty_print
+      markings = {
+        Game::EMPTY => " ",
+        Game::X     => "x",
+        Game::O     => "o",
+      }
+      pretty_board = to_a.map { |m| markings[m] }
+
+      print " " + pretty_board[0, 3].join(" | ") + " \n" +
+            "-" * 11 + "\n" +
+            " " + pretty_board[3, 3].join(" | ") + " \n" +
+            "-" * 11 + "\n" +
+            " " + pretty_board[6, 3].join(" | ") + " \n"
+    end
+
     def ==(other)
       other.is_a?(self.class) && to_s == other.to_s
     end
