@@ -23,6 +23,19 @@ module Game
       x_won? || o_won? || draw?
     end
 
+    def to_s
+      case
+      when x_won?
+        "X won"
+      when o_won?
+        "O won"
+      when draw?
+        "Draw"
+      else
+        "In progress"
+      end
+    end
+
     def x_won?
       WIN_INDEX_TRIPLETS.any? do |triplet|
         @board.values_at(*triplet) == [X, X, X]

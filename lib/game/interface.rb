@@ -28,6 +28,8 @@ module Game
         break if end_condition.ended?
       end
 
+      # puts end_condition
+
       players.each do |player|
         player.show_state(@board)
         player.show_end_message(end_condition)
