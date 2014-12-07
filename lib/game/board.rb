@@ -9,7 +9,8 @@ module Game
   class Board
     EMPTY_BOARD_STR = EMPTY * 9
 
-    class InvalidMove < StandardError; end
+    class OccupiedSpace < StandardError; end
+    class WrongPlayer < StandardError; end
 
     def initialize(board_str = EMPTY_BOARD_STR)
       @board_str = board_str
@@ -21,21 +22,6 @@ module Game
 
     def to_s
       @board_str
-    end
-
-    def pretty_print
-      markings = {
-        Game::EMPTY => " ",
-        Game::X     => "x",
-        Game::O     => "o",
-      }
-      pretty_board = to_a.map { |m| markings[m] }
-
-      print " " + pretty_board[0, 3].join(" | ") + " \n" +
-            "-" * 11 + "\n" +
-            " " + pretty_board[3, 3].join(" | ") + " \n" +
-            "-" * 11 + "\n" +
-            " " + pretty_board[6, 3].join(" | ") + " \n"
     end
 
     def ==(other)
@@ -56,14 +42,14 @@ module Game
 
     def play(what, where)
       unless @board_str[where] == EMPTY
-        raise InvalidMove.new("There is already a mark in space #{where}.")
+        raise OccupiedSpace.new
       end
 
       new_board_str = @board_str.dup
       new_board_str[where] = what
 
       unless valid_str?(new_board_str)
-        raise InvalidMove.new("The other player should be playing.")
+        raise WrongPlayer.new
       end
 
       Board.new(new_board_str)

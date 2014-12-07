@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    ansi (1.4.3)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     coderay (1.1.0)
@@ -51,6 +52,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ansi
   guard
   guard-rspec
   rspec

@@ -1,4 +1,6 @@
 require 'player/base'
+require 'game/interface'
+require 'ansi'
 
 module Player
   class Human < Base
@@ -7,6 +9,11 @@ module Player
       4, 5, 6,
       1, 2, 3,
     ]
+
+    MARKINGS = {
+      Game::X => ANSI.red  + "x" + ANSI.clear,
+      Game::O => ANSI.blue + "o" + ANSI.clear,
+    }
 
     def initialize(mark)
       @mark = mark
@@ -19,11 +26,30 @@ module Player
     end
 
     def show_state(board)
-      board.pretty_print
+      pretty_board = board.to_a.map { |m| MARKINGS[m] }
+      # add hints to empty spaces
+      pretty_board.each_index do |i|
+        pretty_board[i] ||= ANSI.black + BOARD_TO_NUMPAD[i].to_s + ANSI.clear
+      end
+
+      print " " + pretty_board[0, 3].join(" | ") + " \n" +
+            "-" * 11 + "\n" +
+            " " + pretty_board[3, 3].join(" | ") + " \n" +
+            "-" * 11 + "\n" +
+            " " + pretty_board[6, 3].join(" | ") + " \n"
     end
 
     def show_exception(exception)
-      puts exception
+      msg = case
+      when exception.kind_of?(Game::Interface::OccupiedSpace)
+        "This space is already occupied, please select a different one."
+      when exception.kind_of?(Game::Interface::InvalidInputNumber)
+        "Please enter a number from 1 to 9."
+      else
+        "Unknown error! - #{exception}"
+      end
+
+      puts ANSI.red + msg + ANSI.clear
     end
 
     def show_intro

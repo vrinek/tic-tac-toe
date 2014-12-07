@@ -4,7 +4,8 @@ require 'game/end_condition'
 
 module Game
   class Interface
-    class InvalidInput < StandardError; end
+    class InvalidInputNumber < StandardError; end
+    class OccupiedSpace < StandardError; end
 
     def initialize(starting_board = Board.new)
       @board = starting_board
@@ -19,7 +20,7 @@ module Game
 
         begin
           process_input(player.ask_for_input)
-        rescue InvalidInput => exc
+        rescue OccupiedSpace, InvalidInputNumber => exc
           player.show_exception(exc)
           retry
         end
@@ -43,13 +44,13 @@ module Game
 
     def process_input(input)
       input = input.to_s.strip
-      raise InvalidInput.new("Please enter a number from 1 to 9.") unless input =~ /^\d$/
+      raise InvalidInputNumber.new unless input =~ /^\d$/
 
       input = input.to_i
       begin
         @board = @board.play(@board.current_player, input)
-      rescue Board::InvalidMove
-        raise InvalidInput.new("This space is already occupied, please select a different one.")
+      rescue Board::OccupiedSpace
+        raise OccupiedSpace.new
       end
     end
   end
