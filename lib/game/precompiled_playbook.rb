@@ -16,7 +16,7 @@ module Game
           @values = JSON.parse(file.read)
         end
       else
-        @values = {}
+        @values = []
         value(Game::Board.new) # traverses all states and saves the values
 
         File.open(filename, 'w') do |file|
