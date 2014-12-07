@@ -25,14 +25,10 @@ module Game
 
     def to_s
       case
-      when x_won?
-        "X won"
-      when o_won?
-        "O won"
-      when draw?
-        "Draw"
-      else
-        "In progress"
+      when x_won? then "X won"
+      when o_won? then "O won"
+      when draw? then "Draw"
+      else "In progress"
       end
     end
 
