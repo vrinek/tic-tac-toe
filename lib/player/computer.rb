@@ -2,7 +2,7 @@ require 'player/base'
 require 'game/precompiled_playbook'
 
 module Player
-  class AI < Base
+  class Computer < Base
     def initialize(mark)
       @mark = mark
       @playbook = Game::PrecompiledPlaybook.new

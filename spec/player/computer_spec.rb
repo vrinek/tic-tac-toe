@@ -1,10 +1,10 @@
-require 'player/ai'
+require 'player/computer'
 require 'game/board'
 
-describe Player::AI do
+describe Player::Computer do
   context "on a board where the opponent is about to win" do
     let(:board) { Game::Board.new("100220001") }
-    subject { Player::AI.new("X") }
+    subject { Player::Computer.new("X") }
 
     before { subject.show_state(board) }
 
@@ -15,7 +15,7 @@ describe Player::AI do
 
   context "on a board where the player is about to win" do
     let(:board) { Game::Board.new("002110002") }
-    subject { Player::AI.new("X") }
+    subject { Player::Computer.new("X") }
 
     before { subject.show_state(board) }
 

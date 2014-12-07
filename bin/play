@@ -4,20 +4,20 @@ $: << "./lib"
 require "game/interface"
 require "player/human"
 require "player/random"
-require "player/ai"
+require "player/computer"
 
 print "Do you want to play with X or O? "
 loop do
   input = STDIN.gets.strip
   case input
   when "O", "o"
-    Game::Interface.new.start(Player::AI, Player::Human)
+    Game::Interface.new.start(Player::Computer, Player::Human)
     break
   when "X", "x"
-    Game::Interface.new.start(Player::Human, Player::AI)
+    Game::Interface.new.start(Player::Human, Player::Computer)
     break
   when ""
-    Game::Interface.new.start(Player::AI, Player::AI, announce_result: true)
+    Game::Interface.new.start(Player::Computer, Player::Computer, announce_result: true)
     break
   else
     print "Unrecognized input #{input.inspect}. Please enter either X or O: "
