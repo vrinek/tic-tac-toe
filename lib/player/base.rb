@@ -1,4 +1,4 @@
-require 'player'
+require 'game'
 
 module Player
   class Base
