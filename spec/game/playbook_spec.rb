@@ -2,14 +2,7 @@ require 'game/playbook'
 require 'game/board'
 
 describe Game::Playbook do
-  before(:all) {
-    @playbook = Game::Playbook.new
-    print "\nPrecompiling the playbook..."
-    @playbook.precompile!
-    print " Done!\n"
-  }
-
-  subject { @playbook }
+  subject { Game::Playbook.new }
 
   context "on a board where the opponent is about to win" do
     let(:board) { Game::Board.new("100220001") }
@@ -67,38 +60,6 @@ describe Game::Playbook do
         Game::Move.new(Game::X, 6),
         Game::Move.new(Game::X, 8)
       )
-    end
-  end
-
-  context "when precompiling the playbook" do
-    before(:all) {
-      @board = Game::Board.new("100000002")
-      @precompiled_playbook = Game::Playbook.new
-      print "\nPrecompiling the playbook..."
-      @precompiled_playbook.precompile!
-      print " Done!\n"
-    }
-    let(:precompiled_playbook) { @precompiled_playbook }
-    let(:unprecompiled_playbook) { Game::Playbook.new }
-    let(:board) { @board }
-
-    it "performs faster" do
-      t = Time.now
-      precompiled_playbook.value(board)
-      precompiled_dt = Time.now - t
-
-      t = Time.now
-      unprecompiled_playbook.value(board)
-      unprecompiled_dt = Time.now - t
-
-      expect(precompiled_dt < unprecompiled_dt).to be_truthy
-    end
-
-    it "returns the same results" do
-      precompiled_moves = precompiled_playbook.best_moves(board)
-      unprecompiled_moves = unprecompiled_playbook.best_moves(board)
-
-      expect(precompiled_moves).to eql(unprecompiled_moves)
     end
   end
 end
