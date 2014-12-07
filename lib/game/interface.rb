@@ -1,6 +1,5 @@
 require 'game'
 require 'game/board'
-require 'game/progression'
 require 'game/end_condition'
 
 module Game
@@ -38,10 +37,6 @@ module Game
 
     private
 
-    def progression
-      Progression.new(@board)
-    end
-
     def end_condition
       EndCondition.new(@board)
     end
@@ -52,7 +47,7 @@ module Game
 
       input = input.to_i
       begin
-        @board = @board.play(progression.current_player, input)
+        @board = @board.play(@board.current_player, input)
       rescue Board::InvalidMove
         raise InvalidInput.new("This space is already occupied, please select a different one.")
       end

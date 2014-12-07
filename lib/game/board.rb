@@ -1,4 +1,5 @@
 require 'game'
+require 'game/move'
 
 module Game
   # The Board is the state.
@@ -74,6 +75,23 @@ module Game
 
     def [](index)
       @board_str[index]
+    end
+
+    def next_moves
+      moves = []
+      to_a.each_with_index do |mark, index|
+        if mark == EMPTY
+          moves << Move.new(current_player, index)
+        end
+      end
+      moves
+    end
+
+    def current_player
+      x_plays = to_a.select{|s| s == X}.length
+      o_plays = to_a.select{|s| s == O}.length
+
+      x_plays <= o_plays ? X : O
     end
 
     private

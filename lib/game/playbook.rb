@@ -1,6 +1,5 @@
 require 'game'
 require 'game/board'
-require 'game/progression'
 require 'game/end_condition'
 require 'json'
 
@@ -36,15 +35,14 @@ module Game
     end
 
     def best_moves(board)
-      progression = Progression.new(board)
-      moves_map = progression.next_moves.each_with_object({}) do |move, map|
+      moves_map = board.next_moves.each_with_object({}) do |move, map|
         next_board = move.apply_to(board)
         v = value(next_board)
         map[v] ||= []
         map[v] << move
       end
 
-      if progression.current_player == X
+      if board.current_player == X
         moves_map[MAX] || moves_map[DRAW] || moves_map[MIN]
       else
         moves_map[MIN] || moves_map[DRAW] || moves_map[MAX]
@@ -60,7 +58,7 @@ module Game
 
       value = if end_condition.ended?
         final_value(end_condition)
-      elsif Progression.new(board).current_player == X
+      elsif board.current_player == X
         max_value(board)
       else
         min_value(board)
@@ -90,7 +88,7 @@ module Game
     end
 
     def next_values(board)
-      Progression.new(board).next_moves.map do |move|
+      board.next_moves.map do |move|
         next_board = move.apply_to(board)
         value(next_board)
       end
