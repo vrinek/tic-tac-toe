@@ -57,12 +57,12 @@ module Player
       puts "The board positions can be selected by using the Numpad."
     end
 
-    def show_end_message(end_condition)
-      if end_condition.x_won? && @mark == "X" || end_condition.o_won? && @mark == "O"
+    def show_end_message(board)
+      if board.x_won? && @mark == "X" || board.o_won? && @mark == "O"
         puts "You won!"
-      elsif end_condition.o_won? && @mark == "X" || end_condition.x_won? && @mark == "O"
+      elsif board.o_won? && @mark == "X" || board.x_won? && @mark == "O"
         puts "You lost..."
-      elsif end_condition.draw?
+      elsif board.draw?
         puts "It's a draw."
       end
     end

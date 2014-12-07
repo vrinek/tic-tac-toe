@@ -1,6 +1,5 @@
 require 'game'
 require 'game/board'
-require 'game/end_condition'
 
 module Game
   class Interface
@@ -25,22 +24,18 @@ module Game
           retry
         end
 
-        break if end_condition.ended?
+        break if @board.ended?
       end
 
       players.each do |player|
         player.show_state(@board)
-        player.show_end_message(end_condition)
+        player.show_end_message(@board)
       end
 
-      puts end_condition if announce_result
+      puts @board.state if announce_result
     end
 
     private
-
-    def end_condition
-      EndCondition.new(@board)
-    end
 
     def process_input(input)
       input = input.to_s.strip

@@ -1,6 +1,5 @@
 require 'game'
 require 'game/board'
-require 'game/end_condition'
 require 'json'
 
 module Game
@@ -25,13 +24,11 @@ module Game
     end
 
     def value(board)
-      end_condition = EndCondition.new(board)
-
       case
       # either the game has ended
-      when end_condition.x_won?      then MAX
-      when end_condition.o_won?      then MIN
-      when end_condition.draw?       then DRAW
+      when board.x_won?              then MAX
+      when board.o_won?              then MIN
+      when board.draw?               then DRAW
       # or it is still in progress
       when board.current_player == X then next_values(board).max
       when board.current_player == O then next_values(board).min
