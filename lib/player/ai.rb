@@ -1,11 +1,11 @@
 require 'player/base'
-require 'game/playbook'
+require 'game/precompiled_playbook'
 
 module Player
   class AI < Base
     def initialize(mark)
       @mark = mark
-      @playbook = Game::Playbook.new
+      @playbook = Game::PrecompiledPlaybook.new
     end
 
     def show_state(board)
