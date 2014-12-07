@@ -26,10 +26,10 @@ module Game
     end
 
     def value(board)
-      if @values[board.to_s]
-        @values[board.to_s]
+      if @values[board.id]
+        @values[board.id]
       else
-        @values[board.to_s] = super
+        @values[board.id] = super
       end
     end
   end

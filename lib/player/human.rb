@@ -26,7 +26,7 @@ module Player
     end
 
     def show_state(board)
-      pretty_board = board.to_a.map { |m| MARKINGS[m] }
+      pretty_board = board.spaces.map { |m| MARKINGS[m] }
       # add hints to empty spaces
       pretty_board.each_index do |i|
         pretty_board[i] ||= ANSI.black + BOARD_TO_NUMPAD[i].to_s + ANSI.clear

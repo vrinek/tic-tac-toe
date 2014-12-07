@@ -16,20 +16,20 @@ module Game
       @board_str = board_str
     end
 
-    def to_a
+    def spaces
       @board_str.chars
     end
 
-    def to_s
-      @board_str
+    def id
+      @board_str.to_i(3)
     end
 
     def ==(other)
-      other.is_a?(self.class) && to_s == other.to_s
+      other.is_a?(self.class) && id == other.id
     end
 
     def values_at(*args)
-      to_a.values_at(*args)
+      spaces.values_at(*args)
     end
 
     def empty?
@@ -37,7 +37,7 @@ module Game
     end
 
     def full?
-      !to_a.find{|c| c == EMPTY}
+      !spaces.find{|c| c == EMPTY}
     end
 
     def play(what, where)
@@ -65,7 +65,7 @@ module Game
 
     def next_moves
       moves = []
-      to_a.each_with_index do |mark, index|
+      spaces.each_with_index do |mark, index|
         if mark == EMPTY
           moves << Move.new(current_player, index)
         end
@@ -74,8 +74,8 @@ module Game
     end
 
     def current_player
-      x_plays = to_a.select{|s| s == X}.length
-      o_plays = to_a.select{|s| s == O}.length
+      x_plays = spaces.select{|s| s == X}.length
+      o_plays = spaces.select{|s| s == O}.length
 
       x_plays <= o_plays ? X : O
     end
