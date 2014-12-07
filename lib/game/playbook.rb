@@ -56,12 +56,14 @@ module Game
 
       end_condition = EndCondition.new(board)
 
-      value = if end_condition.ended?
-        final_value(end_condition)
-      elsif board.current_player == X
-        max_value(board)
-      else
-        min_value(board)
+      value = case
+      # either the game has ended
+      when end_condition.x_won?      then MAX
+      when end_condition.o_won?      then MIN
+      when end_condition.draw?       then DRAW
+      # or it is still in progress
+      when board.current_player == X then next_values(board).max
+      when board.current_player == O then next_values(board).min
       end
 
       if @precompiled_values
@@ -72,20 +74,6 @@ module Game
     end
 
     private
-
-    def final_value(end_condition)
-      return MAX  if end_condition.x_won?
-      return MIN  if end_condition.o_won?
-      return DRAW if end_condition.draw?
-    end
-
-    def max_value(board)
-      next_values(board).max
-    end
-
-    def min_value(board)
-      next_values(board).min
-    end
 
     def next_values(board)
       board.next_moves.map do |move|
