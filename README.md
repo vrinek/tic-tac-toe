@@ -1,17 +1,17 @@
 # Tic-Tac-Toe in Ruby
 
-To play the game, just clone this repository and run `./bin/play`. You should see something like this:
+To play the game, just clone this repository, `bundle install` and run `bundle exec ruby bin/play`. You should see something like this:
 
     Do you want to play with X or O? X
     Welcome to a game of Tic-Tac-Toe!
     The board positions can be selected by using the Numpad.
-       |   |
+     7 | 8 | 9
     -----------
-       |   |
+     4 | 5 | 6
     -----------
-       |   |
+     1 | 2 | 3
     Please enter move for player X:
-
+    
 ### Tests and contributing
 
 The game contains some unit tests. In order to run the tests do the following:
