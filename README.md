@@ -11,6 +11,10 @@ To play the game, just clone this repository, `bundle install` and run `bundle e
     -----------
      1 | 2 | 3
     Please enter move for player X:
+
+### Updating the game
+
+`git pull` will fetch the current version of the game. Always make sure to `bundle install` and `rm -rf tmp/*` before attempting to run the game. 
     
 ### Tests and contributing
 
